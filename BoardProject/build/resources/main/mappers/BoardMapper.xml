@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BoardProject.mapper.BoardMapper">
+    <sql id="boardColumns">
+        idx
+        ,title
+		, content
+		, writer
+		, view_cnt
+		, notice_yn
+		, secret_yn
+		, delete_yn
+		, insert_time
+		, update_time
+		, delete_time
+    </sql>
+
+	<insert id="insertBoard" parameterType="BoardDto">
+		INSERT INTO tb_board (
+		<include refid="boardColumns" />
+		) VALUES (
+		#{idx}
+		, #{title}
+		, #{content}
+		, #{writer}
+		, 0
+		, IFNULL(#{noticeYn}, 'N')
+		, IFNULL(#{secretYn}, 'N')
+		, 'N'
+		, NOW()
+		, NULL
+		, NULL
+		)
+	</insert>
+</mapper>
