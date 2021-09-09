@@ -1,17 +1,24 @@
 package com.example.BoardProject.mapper;
 
-import com.example.BoardProject.dto.BoardDto;
+import java.util.List;
+
+import com.example.BoardProject.domain.BoardDTO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    public int insertBoard(BoardDto boardDto);
-    public BoardDto selectBoardDetail(Long idx);
-    public int updateBoard(BoardDto boardDto);
+
+    public int insertBoard(BoardDTO params);
+
+    public BoardDTO selectBoardDetail(Long idx);
+
+    public int updateBoard(BoardDTO params);
+
     public int deleteBoard(Long idx);
-    public List<BoardDto> selectBoardList();
+
+    public List<BoardDTO> selectBoardList();
+
     public int selectBoardTotalCount();
 
 }
