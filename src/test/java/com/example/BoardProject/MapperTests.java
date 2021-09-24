@@ -85,10 +85,10 @@ public class MapperTests {
     @Test
     public void deleteBoard() {
 
-        int result = boardMapper.deleteBoard((long) 1);
-        if (result == 1) {
+        int result = boardMapper.deleteBoard((long) 51);
+        if (result == 51) {
             try {
-                BoardDto board = boardMapper.selectBoardDetail((long) 1);
+                BoardDto board = boardMapper.selectBoardDetail((long) 51);
                 String boardJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(board);
 
                 System.out.println("=========");
