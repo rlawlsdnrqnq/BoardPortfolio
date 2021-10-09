@@ -41,8 +41,8 @@ public class BoardController extends UiUtils {
     }
 
     @GetMapping(value = "/board/list.do")
-    public String openBoardList(@ModelAttribute("criteria")Criteria criteria, Model model) {
-        List<BoardDto> boardDtoList = boardService.getBoardList(criteria);
+    public String openBoardList(@ModelAttribute("boardDto")BoardDto boardDto, Model model) {
+        List<BoardDto> boardDtoList = boardService.getBoardList(boardDto);
         model.addAttribute("boardList", boardDtoList);
 
         return "board/list";

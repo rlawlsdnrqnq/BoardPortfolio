@@ -18,10 +18,10 @@ public interface BoardMapper {
 
     public int deleteBoard(Long id);
 
-    public List<BoardDto> selectBoardList(Criteria criteria);
+    public List<BoardDto> selectBoardList(BoardDto boardDto);
 
-    public int selectBoardTotalCount(Criteria criteria);
+    public int selectBoardTotalCount(BoardDto boardDto);
 
-    public void deleteTestData();
+    //public void deleteTestData();
 
 }

@@ -21,7 +21,17 @@ public class Criteria {
         this.pageSize = 10;
     }
 
-    public int getStartPage() {
-        return (currentPageNo - 1) * recordsPerPage;
+    public String makeQueryString(int pageNo) {
+        UriComponents uriComponents = UriComponentsBuilder.newInstance()
+                .queryParam("currentPageNo", pageNo)
+                .queryParam( "recordsPerPage", recordsPerPage)
+                .queryParam("pageSize", pageSize)
+                .queryParam("searchKeyword", searchKeyword)
+                .queryParam("searchType", searchType)
+                .build()
+                .encode();
+
+        return uriComponents.toUriString();
     }
+
 }

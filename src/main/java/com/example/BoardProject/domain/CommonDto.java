@@ -11,6 +11,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class CommonDto extends Criteria {
+
     private PaginationInfo paginationInfo;
-    private
+    private String deleteYn;
+    private LocalDateTime insertTime;
+    private LocalDateTime updateTime;
+    private LocalDateTime deleteTime;
 }

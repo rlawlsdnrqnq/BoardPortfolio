@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<nav th:fragment="pagination" th:if="${boardDto != null and boardDto.paginationInfo.totalRecordCount > 0}" th:object="${boardDto.paginationInfo}" th:with="info=${boardDto.paginationInfo}" aria-label="Page navigation" class="text-center">
-    <ul class="pagination">
-        <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(1)} ]])">
-            <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-        </li>
-        <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.firstPage - 1)} ]])">
-            <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
-        </li>
-        <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == boardDto.currentPageNo} ? 'active'">
-            <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(pageNo)} ]])"></a>
-        </li>
-        <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.lastPage + 1)} ]])">
-            <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
-        </li>
-        <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.totalPageCount)} ]])">
-            <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-        </li>
-    </ul>
-</nav>
-
+    <nav th:fragment="pagination" th:if="${boardDto != null and boardDto.paginationInfo.totalRecordCount > 0}" th:object="${boardDto.paginationInfo}" th:with="info=${boardDto.paginationInfo}" aria-label="Page navigation" class="text-center">
+        <ul class="pagination">
+            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]]), [[ ${boardDto.makeQueryString(1)} ]]">
+                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]]), [[ ${boardDto.makeQueryString(info.firstPage - 1)}]]">
+                <a href="javacript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsquo;</span></a>
+            </li>
+            <li th:each="pageNo : *{#numbers.sequence(firstPage, lastPage)}" th:class="${pageNo == boardDto.currentPageNo}" ? 'active'">
+                <a href="javacript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(pageNo)} ]])"></a>
+            </li>
+            <li th:if="${hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.lastPage + 1)} ]])"><a href="javascript:void(0)" aria-label="Next"></a> <span aria-hidden="true">&rsquo;</span>
+            </li>
+            <li th:if="${hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.totalPageCount)} ]])"><a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+        </ul>
+    </nav>
 </html>

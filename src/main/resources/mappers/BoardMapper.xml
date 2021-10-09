@@ -68,7 +68,7 @@
             id = #{id}
     </update>
 
-    <select id="selectBoardList" parameterType="Criteria" resultType="BoardDto">
+    <select id="selectBoardList" parameterType="BoardDto" resultType="BoardDto">
         SELECT
             <include refid="boardColumns" />
         FROM
@@ -80,10 +80,10 @@
             id DESC,
             insert_time DESC
         LIMIT
-            ${startPage}, #{recordsPerPage}
+            ${pagInationInfo.firstRecordIndex}, #{recordPerPage}
     </select>
 
-    <select id="selectBoardTotalCount" parameterType="Criteria" resultType="int">
+    <select id="selectBoardTotalCount" parameterType="BoardDto" resultType="int">
         SELECT
             COUNT(*)
         FROM

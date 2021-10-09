@@ -1,7 +1,5 @@
 package com.example.BoardProject.domain;
 
-import java.time.LocalDateTime;
-
 import lombok.Getter;
 import lombok.Setter;
 

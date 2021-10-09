@@ -111,9 +111,9 @@ public class MapperTests {
         }
 
         @Test
-        public void selectBoardList() {
-            int boardTotalCount = boardMapper.selectBoardTotalCount();
-            List<BoardDto> boardList = boardMapper.selectBoardList();
+        public void selectBoardList(BoardDto boardDto) {
+            int boardTotalCount = boardMapper.selectBoardTotalCount(boardDto);
+            List<BoardDto> boardList = boardMapper.selectBoardList(boardDto);
 
             if(boardTotalCount > 0) {
                 if(!CollectionUtils.isEmpty(boardList)) {
