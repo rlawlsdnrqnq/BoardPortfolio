@@ -80,7 +80,7 @@
             id DESC,
             insert_time DESC
         LIMIT
-            ${pagInationInfo.firstRecordIndex}, #{recordPerPage}
+            #{paginationInfo.firstRecordIndex}, #{recordsPerPage}
     </select>
 
     <select id="selectBoardTotalCount" parameterType="BoardDto" resultType="int">

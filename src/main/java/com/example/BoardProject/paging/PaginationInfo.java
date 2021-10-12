@@ -18,13 +18,13 @@ public class PaginationInfo {
 
     public PaginationInfo(Criteria criteria) {
         if(criteria.getCurrentPageNo() < 1) {
-            this.criteria.setCurrentPageNo(1);
+            criteria.setCurrentPageNo(1);
         }
         if(criteria.getRecordsPerPage() < 1 || criteria.getRecordsPerPage() > 100) {
-            this.criteria.setRecordsPerPage(10);
+            criteria.setRecordsPerPage(10);
         }
         if(criteria.getPageSize() < 5 || criteria.getPageSize() > 20) {
-            this.criteria.setPageSize(10);
+            criteria.setPageSize(10);
         }
         this.criteria = criteria;
     }

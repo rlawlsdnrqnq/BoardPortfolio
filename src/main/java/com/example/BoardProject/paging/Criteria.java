@@ -26,8 +26,8 @@ public class Criteria {
                 .queryParam("currentPageNo", pageNo)
                 .queryParam( "recordsPerPage", recordsPerPage)
                 .queryParam("pageSize", pageSize)
-                .queryParam("searchKeyword", searchKeyword)
                 .queryParam("searchType", searchType)
+                .queryParam("searchKeyword", searchKeyword)
                 .build()
                 .encode();
 

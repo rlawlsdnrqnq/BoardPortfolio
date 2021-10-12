@@ -4,15 +4,6 @@
     <title>List page</title>
   </th:block>
 
-  <th:block layout:fragment="search">
-    <form action="#" id="searchform-header" class="searchform js__toggle active pull-right">
-      <input type="search"placeholder="Search..." class="input-search">
-      <button class="mdi mdi-magnify button-search" type="submit">
-        <i class="fa-search" aria-hidden="true"></i>
-      </button>
-    </form>
-  </th:block>
-
   <th:block layout:fragment="content">
     <div class="table-responsive clearfix">
       <table class="table table-hover">
@@ -29,7 +20,7 @@
           <tr th:if="${not #lists.isEmpty(boardList)}" th:each="row : ${boardList}">
             <td scope="row" th:text="${#strings.equals(row.noticeYn, 'Y') ? '공지' : row.id}"></td>
             <td>
-              <a th:href="@{/board/view.do(id=${row.id})}" th:text="${row.title}"></a>
+              <a th:href="@{/board/view.do( id=${row.id} )}" th:text="${row.title}"></a>
             </td>
             <td th:text="${row.author}"></td>
             <td th:text="${#temporals.format(row.insertTime, 'yyyy-MM-dd')}"></td>
@@ -59,7 +50,7 @@
         location.href = uri + queryString;
       }
 
-      /*]]>*/
+      /*[[>*/
     </script>
   </th:block>
 </html>
