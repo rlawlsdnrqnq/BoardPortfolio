@@ -4,6 +4,10 @@
     <title>List page</title>
   </th:block>
 
+  <th:block layout:fragment="search">
+    <div th:replace="board/fragments/common :: search"></div>
+  </th:block>
+
   <th:block layout:fragment="content">
     <div class="table-responsive clearfix">
       <table class="table table-hover">
@@ -20,7 +24,7 @@
           <tr th:if="${not #lists.isEmpty(boardList)}" th:each="row : ${boardList}">
             <td scope="row" th:text="${#strings.equals(row.noticeYn, 'Y') ? '공지' : row.id}"></td>
             <td>
-              <a th:href="@{/board/view.do( id=${row.id} )}" th:text="${row.title}"></a>
+              <a th:href="|@{/board/view.do}${boardDto.makeQueryString(boardDto.currentPageNo)}&id=${row.id}|" th:text="${row.title}"></a>
             </td>
             <td th:text="${row.author}"></td>
             <td th:text="${#temporals.format(row.insertTime, 'yyyy-MM-dd')}"></td>
@@ -48,6 +52,27 @@
 
       function movePage(uri, queryString) {
         location.href = uri + queryString;
+      }
+
+      function searchBoard(form) {
+        //메인 검색
+        if(isEmpty(form) == true) {
+          var searchKeyword = document.getElementById("mainSearchKeyword");
+          if(isEmpty(searchKeyword.value) == true) {
+            alert("키워드를 입력해 주세요.");
+            searchKeyword.focus();
+            return false;
+          }
+          form = document.getElementById("searchForm");
+          form.searchKeyword.value = searchKeyword.value;
+          form.submit();
+        }
+        //드롭다운 검색
+        if(isEmpty(form.searchKeyword.value) == true) {
+          alert("키워드를 입력해 주세요.");
+          form.searchKeyword.focus();
+          return false;
+        }
       }
 
       /*[[>*/
