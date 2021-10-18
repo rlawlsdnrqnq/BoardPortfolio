@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <nav th:fragment="pagination" th:if="${boardDto != null and boardDto.paginationInfo.totalRecordCount > 0}" th:object="${boardDto.paginationInfo}" th:with="info=${boardDto.paginationInfo}" aria-label="Page navigation" class="text-center">
-        <ul class="pagination">
-            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(1)} ]])">
-                <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-            </li>
-            <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.firstPage - 1)} ]])">
-                <a href="javacript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsquo;</span></a>
-            </li>
-            <li th:each="pageNo : *{#numbers.sequence(firstPage, lastPage)}" th:class="${pageNo == boardDto.currentPageNo} ? 'active'">
-                <a href="javacript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(pageNo)} ]])"></a>
-            </li>
-            <li th:if="${hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.lastPage + 1)} ]])"><a href="javascript:void(0)" aria-label="Next"></a> <span aria-hidden="true">&rsquo;</span>
-            </li>
-            <li th:if="${hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.totalPageCount)} ]])"><a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-            </li>
-        </ul>
-    </nav>
+<nav th:fragment="pagination" th:if="${boardDto != null and boardDto.paginationInfo.totalRecordCount > 0}" th:object="${boardDto.paginationInfo}" th:with="info=${boardDto.paginationInfo}" aria-label="Page navigation" class="text-center">
+    <ul class="pagination">
+        <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(1)} ]])">
+            <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+        </li>
+        <li th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.firstPage - 1)} ]])">
+            <a href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true">&lsaquo;</span></a>
+        </li>
+        <li th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:class="${pageNo == boardDto.currentPageNo} ? 'active'">
+            <a href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(pageNo)} ]])"></a>
+        </li>
+        <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.lastPage + 1)} ]])">
+            <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&rsaquo;</span></a>
+        </li>
+        <li th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${boardDto.makeQueryString(info.totalPageCount)} ]])">
+            <a href="javascript:void(0)" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+        </li>
+    </ul>
+</nav>
 
     <div th:fragment="search" id="adv-search" class="input-group">
         <input type="text" id="mainSearchKeyword" class="form-control" th:value="${boardDto.searchKeyword}" placeholder="키워드를 입력해 주세요." />
@@ -38,7 +40,7 @@
                                     <option value="" th:selected="${#strings.isEmpty( boardDto.searchType )}">전체</option>
                                     <option value="title" th:selected="${#strings.equals( boardDto.searchType, 'title' )}">제목</option>
                                     <option value="content" th:selected="${#strings.equals( boardDto.searchType, 'content' )}">내용</option>
-                                    <option value="writer" th:selected="${#strings.equals( boardDto.searchType, 'writer' )}">작성자</option>
+                                    <option value="writer" th:selected="${#strings.equals( boardDto.searchType, 'author' )}">작성자</option>
                                 </select>
                             </div>
                             <div class="form-group">
