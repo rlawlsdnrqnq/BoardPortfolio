@@ -24,7 +24,7 @@
                             AND content LIKE CONCAT('%', #{searchKeyword}, '%')
                         </when>
                         <when test="'author'.equals(searchType)">
-                            AND writer LIKE CONCAT('%', #{searchKeyword}, '%')
+                            AND author LIKE CONCAT('%', #{searchKeyword}, '%')
                         </when>
                     </choose>
                 </when>
