@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.BoardProject.mapper.CommentMapper">
+
+    <sql id="commentColumns">
+        id,
+        boardId,
+        content,
+        author,
+        deleteYn,
+        insertTime,
+        updateTime,
+        deleteTime
+    </sql>
+
+    <insert id="insertComment" parameterType="CommentDto">
+        INSERT INTO tb_comment(
+            <include refid="commentColumns"/>
+        ) VALUES (
+                  #{id},
+                  #{boardId},
+                  #{content},
+                  #{author},
+                  IFNULL(#{deleteYn, 'N'}),
+                  NOW(),
+                  NULL,
+                  NULL
+        )
+    </insert>
+
+    <select id="selectCommentDetail" parameterType="long" resultType="CommentDto">
+        SELECT
+            <include refid="commentColumns"/>
+        FROM
+            tb_comment
+        WHERE
+            delete_yn = 'N'
+        AND
+            id = #{id}
+    </select>
+
+    <update id="updateComment" parameterType="CommentDto">
+        UPDATE
+            tb_comment
+        SET
+            content = #{content},
+            author = #{author},
+            update_time = NOW()
+        WHERE
+            id = #{id}
+    </update>
+
+    <update id="deleteComment" parameterType="long">
+        UPDATE
+            tb_comment
+        SET
+            delete_yn = 'Y'
+            delete_time = NOW()
+        WHERE
+            id = #{id}e
+    </update>
+
+    <select id="selectCommentList" parameterType="CommentDto" resultType="CommentDto">
+        SELECT
+            <include refid="commentColumns"/>
+        FROM
+            tb_comment
+        WHERE
+            delete_yn = 'N'
+            board_id = #{boardId}
+        ORDER BY
+            id DESC,
+            insert_time DESC
+    </select>
+
+    <select id="selectCommentTotalCount" parameterType="CommentDto" resultType="int">
+        SELECT
+            (*)
+        FROM
+            tb_comment
+        WHERE
+            delete_yn = 'N'
+        AND
+            board_id = #{boardId}
+    </select>
+</mapper>
