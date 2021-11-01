@@ -19,4 +19,5 @@ public interface CommentMapper {
     public List<CommentDto> selectCommentList(CommentDto commentDto);
 
     public int selectCommentTotalCount(CommentDto commentDto);
+
 }

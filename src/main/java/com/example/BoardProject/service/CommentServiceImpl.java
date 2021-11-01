@@ -12,13 +12,14 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
-    CommentMapper commentMapper;
+    private CommentMapper commentMapper;
+
 
     @Override
     public boolean registerComment(CommentDto commentDto) {
         int queryResult = 0;
 
-        if(commentDto.getId() == null) {
+        if (commentDto.getId() == null) {
             queryResult = commentMapper.insertComment(commentDto);
         } else {
             queryResult = commentMapper.updateComment(commentDto);
@@ -30,9 +31,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public boolean deleteComment(Long id) {
         int queryResult = 0;
-        CommentDto commentDto = commentMapper.selectCommentDetail(id);
 
-        if(commentDto != null && "N".equals(commentDto.getDeleteYn())) {
+        CommentDto comment = commentMapper.selectCommentDetail(id);
+
+        if (comment != null && "N".equals(comment.getDeleteYn())) {
             queryResult = commentMapper.deleteComment(id);
         }
 
@@ -42,10 +44,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDto> getCommentList(CommentDto commentDto) {
         List<CommentDto> commentList = Collections.emptyList();
-        int selectCommentTotalCount = commentMapper.selectCommentTotalCount(commentDto);
 
-        if(selectCommentTotalCount > 0) {
-             commentList = commentMapper.selectCommentList(commentDto);
+        int commentTotalCount = commentMapper.selectCommentTotalCount(commentDto);
+        if (commentTotalCount > 0) {
+            commentList = commentMapper.selectCommentList(commentDto);
         }
 
         return commentList;
