@@ -62,9 +62,12 @@
 
             <form class="form-horizontal form-view">
                 <div class="input-group margin-bottom-20">
-                    <input type="email" class="form-control" placeholder="">
-                    <div class="input-group-btn"><button type="button" class="btn waves-effect waves-light"><i class="fa fa-commenting" aria-hidden="true"></i></button></div>
-                    <!-- /.input-group-btn -->
+                    <input type="text" id="content" class="form-control">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn waves-effect waves-light" th:onclick="insertComment([[ ${board.id} ]])">
+                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
                 <ul class="notice-list"></ul>
             </form>
@@ -77,6 +80,41 @@
 <th:block layout:fragment="script">
     <script th:inline="javascript">
         /*<![CDATA[*/
+
+        //댓글 등록
+        function insertComment(boardId) {
+            var content = document.getElementById("content");
+            if (isEmpty(content.value) == true) {
+                content.setAttribute("placeholder", "댓글을 입력해 주세요.");
+                content.focus();
+                return false;
+            }
+
+            var uri = /*[[ @{/comments} ]]*/;
+            var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+            var commentDto = {"boardId": boardId, "content": content.value, "author": "관리자"};
+
+            $.ajax({
+                url: uri,
+                type: "POST",
+                headers: headers,
+                dataType: "json",
+                data: JSON.stringify(commentDto),
+                success: function(response) {
+                    if (response.result == false) {
+                        alert("댓글 등록에 실패하였습니다.");
+                        return false;
+                    }
+
+                    printCommentList();
+                    content.value = "";
+                },
+                error: function(xhr, status, error) {
+                    alert("에러가 발생하였습니다.");
+                    return false;
+                }
+            });
+        }
 
         //댓글 리스트 출력
         $(function() {
