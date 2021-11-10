@@ -26,10 +26,6 @@ public class CommentController {
         JsonObject jsonObj = new JsonObject();
 
         try {
-            if (id != null) {
-                commentDto.setId(id);
-            }
-
             boolean isRegistered = commentService.registerComment(commentDto);
             jsonObj.addProperty("result", isRegistered);
 
