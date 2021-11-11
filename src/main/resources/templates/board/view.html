@@ -112,7 +112,7 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
 
-        //댓글 버튼 모달 출력
+        //댓글 버튼의 모달 출력
         function openModal(id, author, content) {
             $("#commentModal").modal("toggle");
 
@@ -189,6 +189,37 @@
             });
         }
 
+        //댓글 삭제
+        function deleteComment(id) {
+
+            if (!confirm('댓글을 삭제하시겠어요?')) {
+                return false;
+            }
+
+            var uri = [[ @{/comments/} ]] + id;
+            var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "DELETE"};
+
+            $.ajax({
+                url: uri,
+                type: "DELETE",
+                headers: headers,
+                dataType: "json",
+                success: function(response) {
+                    if (response.result == false) {
+                        alert("댓글 삭제에 실패하였습니다.");
+                        return false;
+                    }
+
+                    printCommentList();
+                    $("#commentModal").modal("hide");
+                },
+                error: function(xhr, status, error) {
+                    alert("에러가 발생하였습니다.");
+                    return false;
+                }
+            });
+        }
+
         //댓글 리스트 출력
         $(function() {
             printCommentList();
@@ -199,7 +230,6 @@
             var uri = /*[[ @{/comments/} + ${board.id} ]]*/;
 
             $.get(uri, function(response) {
-                if (isEmpty(response) == false) {
                     var commentsHtml = "";
 
                     $(response.commentList).each(function(id, comment) {
@@ -214,7 +244,6 @@
                     });
 
                     $(".notice-list").html(commentsHtml);
-                }
             }, "json");
         }
         /*[- end of function -]*/

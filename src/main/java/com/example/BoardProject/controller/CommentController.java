@@ -20,7 +20,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = { "/comments", "/comments/{id}" }, method = { RequestMethod.POST, RequestMethod.PATCH })
+    @RequestMapping(value = {"/comments", "/comments/{id}"}, method = {RequestMethod.POST, RequestMethod.PATCH})
     public JsonObject registerComment(@PathVariable(value = "id", required = false) Long id, @RequestBody final CommentDto commentDto) {
 
         JsonObject jsonObj = new JsonObject();
@@ -52,4 +52,23 @@ public class CommentController {
         }
         return jsonObj;
     }
+
+    @DeleteMapping(value = "/comments/{id}")
+    public JsonObject deleteComment(@PathVariable("id") final Long id) {
+        JsonObject jsonObj = new JsonObject();
+
+        try {
+            boolean isDeleted = commentService.deleteComment(id);
+            jsonObj.addProperty("result", isDeleted);
+
+        } catch (DataAccessException e) {
+            jsonObj.addProperty("message", "데이터베이스 처리 과정에 문제가 발생하였습니다.");
+
+        } catch (Exception e) {
+            jsonObj.addProperty("message", "시스템에 문제가 발생하였습니다.");
+        }
+
+        return jsonObj;
+    }
 }
+

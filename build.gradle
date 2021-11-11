@@ -25,6 +25,8 @@ dependencies {
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.3'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' /* Thymeleaf Layout */
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+	implementation 'commons-io:commons-io:2.6' /* Apache Commons IO */
+	implementation 'commons-fileupload:commons-fileupload:1.4' /* Apache Commons File Upload */
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
