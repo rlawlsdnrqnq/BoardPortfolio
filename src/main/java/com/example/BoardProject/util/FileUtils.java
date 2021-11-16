@@ -1,11 +1,13 @@
 package com.example.BoardProject.util;
 
 import com.example.BoardProject.domain.FileDto;
+import com.example.BoardProject.exception.AttachFileException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +22,7 @@ public class FileUtils {
     private final String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyMMdd"));
 
     /*업로드 경로*/
-    private final String uploadPath = Paths.get("E:", "develop", "upload", today).toString();
+    private final String uploadPath = Paths.get("C:", "develop", "upload", today).toString();
 
     /**
      * 서버에 생성할 파일명을 처리하는 랜덤 문자열 반환
@@ -54,8 +56,29 @@ public class FileUtils {
             try {
                 /* 파일 확장자 */
                 final String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+                /* 서버에 저장할 파일명 (랜덤문자열 + 확장자) */
+                final String saveName = getRandowString() + "." + extension;
 
+                /* 업로드 경로에 saveName과 동일한 파일 이름의 파일 생성 */
+                File target = new File(uploadPath, saveName);
+                file.transferTo(target);
+
+                /* 파일 정보 저장 */
+                FileDto fileDto = new FileDto();
+                fileDto.setBoardId(boardId);
+                fileDto.setOriginalName(file.getOriginalFilename());
+                fileDto.setSaveName(saveName);
+                fileDto.setSize(file.getSize());
+
+                /* 파일 정보 추가 */
+                fileDtoList.add(fileDto);
+            } catch (IOException e) {
+                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file");
+            } catch (Exception e) {
+                throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file");
             }
-        }
+        } //end of for
+        return fileDtoList;
     }
+}
 

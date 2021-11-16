@@ -16,7 +16,7 @@
 		, delete_time
     </sql>
 <!--전달받은 파라미터는 #{ } 표현식을 사용해서 처리합니다.-->
-    <insert id="insertBoard" parameterType="BoardDto">
+    <insert id="insertBoard" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tb_board(
                              <include refid="boardColumns"/>
         )   VALUES (

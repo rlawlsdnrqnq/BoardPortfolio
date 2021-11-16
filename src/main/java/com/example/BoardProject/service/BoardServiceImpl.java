@@ -1,10 +1,16 @@
 package com.example.BoardProject.service;
 
 import com.example.BoardProject.domain.BoardDto;
+import com.example.BoardProject.domain.FileDto;
 import com.example.BoardProject.mapper.BoardMapper;
+import com.example.BoardProject.mapper.FileMapper;
 import com.example.BoardProject.paging.Criteria;
 import com.example.BoardProject.paging.PaginationInfo;
+import com.example.BoardProject.util.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,11 +18,14 @@ import java.util.List;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    private final BoardMapper boardMapper;
+    @Autowired
+    private BoardMapper boardMapper;
 
-    public BoardServiceImpl(BoardMapper boardMapper) {
-        this.boardMapper = boardMapper;
-    }
+    @Autowired
+    private FileMapper fileMapper;
+
+    @Autowired
+    private FileUtils fileUtils;
 
     @Override
     public boolean registerBoard(BoardDto boardDto) {
@@ -28,6 +37,24 @@ public class BoardServiceImpl implements BoardService {
             queryResult = boardMapper.updateBoard(boardDto);
         }
         return (queryResult == 1) ? true : false;
+    }
+
+    @Override
+    public boolean registerBoard(BoardDto boardDto, MultipartFile[] files) {
+        int queryResult = 1;
+
+        if(registerBoard(boardDto) == false) {
+            return false;
+        }
+
+        List<FileDto> fileDtoList = fileUtils.uploadFiles(files, boardDto.getId());
+        if(CollectionUtils.isEmpty(fileDtoList) == false) {
+            queryResult = fileMapper.insertFile(fileDtoList);
+            if(queryResult < 1) {
+                queryResult = 0;
+            }
+        }
+        return (queryResult > 0);
     }
 
     @Override

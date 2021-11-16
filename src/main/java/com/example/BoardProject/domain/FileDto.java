@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FileDto extends CommonDto{
-    
+
     private Long id;
     private Long boardId;
     private String originalName;
