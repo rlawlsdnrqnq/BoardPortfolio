@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface FileMapper {
 
-    public int insertFile(List<FileDto> attachList);
+    public int insertFile(List<FileDto> fileDtoList);
 
     public FileDto selectFileDetail(Long id);
 

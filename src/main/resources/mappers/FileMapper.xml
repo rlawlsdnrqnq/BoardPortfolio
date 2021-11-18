@@ -4,63 +4,74 @@
 <mapper namespace="com.example.BoardProject.mapper.FileMapper">
 
     <sql id="fileColumns">
-        id,
-        board_id,
-        original_name,
-        save_name,
-        size,
-        delete_yn,
-        insert_time,
-        delete_time
+        id
+        , board_id
+		, original_name
+		, save_name
+		, size
+		, delete_yn
+		, insert_time
+		, delete_time
     </sql>
 
     <insert id="insertFile" parameterType="list">
         INSERT INTO tb_file (
-                <include refid="fileColumns"/>
+        <include refid="fileColumns" />
         ) VALUES
         <foreach collection="list" item="item" separator=",">
-        (
-                #{item.id},
-                #{item.boardId},
-                #{item.orginalName},
-                #{item.saveName},
-                #{item.size},
-                'N',
-                NOW(),
-                NULL,
+            (
+            #{item.id}
+            , #{item.boardId}
+            , #{item.originalName}
+            , #{item.saveName}
+            , #{item.size}
+            , 'N'
+            , NOW()
+            , NULL
             )
         </foreach>
     </insert>
 
     <select id="selectFileDetail" parameterType="long" resultType="FileDto">
         SELECT
-            <include refid="fileColumns"/>
+        <include refid="fileColumns" />
         FROM
-            tb_file
+        tb_file
         WHERE
-            delete_yn = 'N'
+        delete_yn = 'N'
         AND
-            id = #{id}
+        id = #{id}
     </select>
 
     <update id="deleteFile" parameterType="long">
-        UPDATE
-            tb_file
+        UPDATE tb_file
         SET
             delete_yn = 'Y'
-            ,delete_time = NOW()
+          , delete_time = NOW()
         WHERE
             board_id = #{boardId}
     </update>
 
-    <select id="selectFileList" parameterType="long" resultType="fileDto">
+    <select id="selectFileList" parameterType="long" resultType="FileDto">
         SELECT
-            <include refid="fileColumns"/>
+        <include refid="fileColumns" />
+        FROM
+        tb_file
+        WHERE
+        delete_yn = 'N'
+        AND
+        board_id = #{boardId}
+    </select>
+
+    <select id="selectFileTotalCount" parameterType="long" resultType="int">
+        SELECT
+            COUNT(*)
         FROM
             tb_file
         WHERE
             delete_yn = 'N'
-        AND
+          AND
             board_id = #{boardId}
     </select>
+
 </mapper>
