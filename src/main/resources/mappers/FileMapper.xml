@@ -34,17 +34,18 @@
 
     <select id="selectFileDetail" parameterType="long" resultType="FileDto">
         SELECT
-        <include refid="fileColumns" />
+            <include refid="fileColumns" />
         FROM
-        tb_file
+            tb_file
         WHERE
-        delete_yn = 'N'
+            delete_yn = 'N'
         AND
-        id = #{id}
+            id = #{id}
     </select>
 
     <update id="deleteFile" parameterType="long">
-        UPDATE tb_file
+        UPDATE
+            tb_file
         SET
             delete_yn = 'Y'
           , delete_time = NOW()
@@ -54,13 +55,13 @@
 
     <select id="selectFileList" parameterType="long" resultType="FileDto">
         SELECT
-        <include refid="fileColumns" />
+            <include refid="fileColumns" />
         FROM
-        tb_file
+            tb_file
         WHERE
-        delete_yn = 'N'
+            delete_yn = 'N'
         AND
-        board_id = #{boardId}
+            board_id = #{boardId}
     </select>
 
     <select id="selectFileTotalCount" parameterType="long" resultType="int">

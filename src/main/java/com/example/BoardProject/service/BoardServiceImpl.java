@@ -91,4 +91,13 @@ public class BoardServiceImpl implements BoardService {
         }
         return boardList;
     }
+
+    @Override
+    public List<FileDto> getFileList(Long boardId) {
+        int fileTotalCount = fileMapper.selectFileTotalCount(boardId);
+        if(fileTotalCount < 1) {
+            return Collections.emptyList();
+        }
+        return  fileMapper.selectFileList(boardId);
+    }
 }

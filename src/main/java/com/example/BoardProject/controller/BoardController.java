@@ -2,6 +2,7 @@ package com.example.BoardProject.controller;
 
 import com.example.BoardProject.constant.Method;
 import com.example.BoardProject.domain.BoardDto;
+import com.example.BoardProject.domain.FileDto;
 import com.example.BoardProject.paging.Criteria;
 import com.example.BoardProject.service.BoardService;
 import com.example.BoardProject.util.UiUtils;
@@ -37,6 +38,9 @@ public class BoardController extends UiUtils {
                 return showMessageWithRedirect("없는 게시글이거나 이미 삭제된 게시글입니다.", "/board/list.do", Method.GET, null, model);
             }
             model.addAttribute("board", board);
+
+            List<FileDto> fileList = boardService.getFileList(id);
+            model.addAttribute("fileList", fileList);
         }
 
         return "board/write";

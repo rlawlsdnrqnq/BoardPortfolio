@@ -47,7 +47,7 @@ public class FileUtils {
         }
 
         /* 업로드 파일 정보를 담을 비어있는 리스트 */
-        List<FileDto> fileDtoList = new ArrayList<>();
+        List<FileDto> attachList = new ArrayList<>();
 
         /* uploadPath에 해당하는 디렉터리가 존재하지 않으면, 부모 디렉터리를 포함한 모든 디렉터리를 생성 */
         File dir = new File(uploadPath);
@@ -75,7 +75,7 @@ public class FileUtils {
                 attach.setSize(file.getSize());
 
                 /* 파일 정보 추가 */
-                fileDtoList.add(attach);
+                attachList.add(attach);
 
             } catch (IOException e) {
                 throw new AttachFileException("[" + file.getOriginalFilename() + "] failed to save file...");
@@ -85,7 +85,7 @@ public class FileUtils {
             }
         } // end of for
 
-        return fileDtoList;
+        return attachList;
     }
 
 }
