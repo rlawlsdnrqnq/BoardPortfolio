@@ -58,7 +58,7 @@ public class BoardController extends UiUtils {
     public String registerBoard(final BoardDto boardDto, final MultipartFile[] files, Model model) {
         Map<String, Object> pagingParams = getPagingParams(boardDto);
         try {
-            boolean isRegistered = boardService.registerBoard(boardDto, files);
+            boolean isRegistered = boardService.registerFile(boardDto, files);
             if (isRegistered == false) {
                 return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
             }
@@ -95,7 +95,7 @@ public class BoardController extends UiUtils {
     Map<String, Object> pagingParams = getPagingParams(boardDto);
     try{
         boolean isDeleted = boardService.deleteBoard(id);
-        if(isDeleted == false) {
+        if(!isDeleted) {
             return showMessageWithRedirect("게시글 삭제에 실패하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
         }
     } catch (DataAccessException e) {

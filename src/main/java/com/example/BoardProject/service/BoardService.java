@@ -9,7 +9,7 @@ import java.util.List;
 public interface BoardService {
     public boolean registerBoard(BoardDto boardDto);
 
-    public boolean registerBoard(BoardDto boardDto, MultipartFile[] files);
+    public boolean registerFile(BoardDto boardDto, MultipartFile[] files);
 
     public BoardDto getBoardDetail(Long id);
 

@@ -18,14 +18,17 @@ import java.util.List;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-    @Autowired
-    private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
 
-    @Autowired
-    private FileMapper fileMapper;
+    private final FileMapper fileMapper;
 
-    @Autowired
-    private FileUtils fileUtils;
+    private final FileUtils fileUtils;
+
+    public BoardServiceImpl(BoardMapper boardMapper, FileMapper fileMapper, FileUtils fileUtils) {
+        this.boardMapper = boardMapper;
+        this.fileMapper = fileMapper;
+        this.fileUtils = fileUtils;
+    }
 
     @Override
     public boolean registerBoard(BoardDto boardDto) {
@@ -35,15 +38,25 @@ public class BoardServiceImpl implements BoardService {
             queryResult = boardMapper.insertBoard(boardDto);
         } else {
             queryResult = boardMapper.updateBoard(boardDto);
+
+            //파일이 추가, 삭제, 변경된 경우
+            if("Y".equals(boardDto.getChangeYn())) {
+                fileMapper.deleteFile(boardDto.getId());
+
+                    //fileIds에 포함된 id를 가지는 파일의 삭제 여부를 'N'으로 업데이트
+                    if(!CollectionUtils.isEmpty(boardDto.getFileIds())) {
+                        fileMapper.undeleteFile(boardDto.getFileIds());
+                    }
+                }
         }
-        return (queryResult == 1) ? true : false;
+        return (queryResult > 0);
     }
 
     @Override
-    public boolean registerBoard(BoardDto boardDto, MultipartFile[] files) {
+    public boolean registerFile(BoardDto boardDto, MultipartFile[] files) {
         int queryResult = 1;
 
-        if(registerBoard(boardDto) == false) {
+        if(!registerBoard(boardDto)) {
             return false;
         }
 
@@ -98,6 +111,6 @@ public class BoardServiceImpl implements BoardService {
         if(fileTotalCount < 1) {
             return Collections.emptyList();
         }
-        return  fileMapper.selectFileList(boardId);
+        return fileMapper.selectFileList(boardId);
     }
 }

@@ -17,4 +17,6 @@ public interface FileMapper {
     public List<FileDto> selectFileList(Long boardId);
 
     public int selectFileTotalCount(Long boardId);
+
+    public int undeleteFile(List<Long> ids);
 }

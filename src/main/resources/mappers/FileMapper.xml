@@ -75,4 +75,15 @@
             board_id = #{boardId}
     </select>
 
+    <update id="undeleteFile" parameterType="list">
+        UPDATE
+            tb_file
+        SET
+            delete_yn = 'N'
+        WHERE
+            id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

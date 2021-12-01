@@ -18,8 +18,11 @@ import javax.sql.DataSource;
 @PropertySource("classpath:/application.properties")
 public class DBConfiguration {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+
+    public DBConfiguration(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")

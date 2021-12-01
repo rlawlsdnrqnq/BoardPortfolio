@@ -17,8 +17,12 @@ import java.util.List;
 
 @RestController
 public class CommentController {
-    @Autowired
-    private CommentService commentService;
+
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
 
     @RequestMapping(value = {"/comments", "/comments/{id}"}, method = {RequestMethod.POST, RequestMethod.PATCH})
     public JsonObject registerComment(@PathVariable(value = "id", required = false) Long id, @RequestBody final CommentDto commentDto) {
@@ -45,7 +49,7 @@ public class CommentController {
         JsonObject jsonObj = new JsonObject();
 
         List<CommentDto> commentList = commentService.getCommentList(commentDto);
-        if (CollectionUtils.isEmpty(commentList) == false) {
+        if (!CollectionUtils.isEmpty(commentList)) {
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new GsonLocalDateTimeAdapter()).create();
             JsonArray jsonArr = gson.toJsonTree(commentList).getAsJsonArray();
             jsonObj.add("commentList", jsonArr);
