@@ -66,10 +66,23 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <!--조회수 미구현-->
+            <!--<div class="form-group">
                 <label for="inp-type-5" class="col-sm-2 control-label">조회 수</label>
                 <div class="col-sm-10">
                     <p class="form-control" th:text="*{viewCnt}"></p>
+                </div>
+            </div>-->
+
+            <div th:if="${not #lists.isEmpty( fileList )}" class="form-group">
+                <label for="inp-type-4" class="col-sm-2 control-label">File</label>
+                <div class="col-sm-10">
+                    <div class="form-control file_list">
+                        <a th:each="row, status : ${fileList}" th:href="@{/board/download( id=${row.id} )}">
+                            <i class="fa fa-file-o" aria-hidden="true"></i>
+                            [[ ${row.originalName} ]]
+                        </a>
+                    </div>
                 </div>
             </div>
         </form>

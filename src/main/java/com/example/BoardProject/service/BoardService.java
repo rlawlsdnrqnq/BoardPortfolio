@@ -18,4 +18,6 @@ public interface BoardService {
     public List<BoardDto> getBoardList(BoardDto boardDto);
 
     public List<FileDto> getFileList(Long boardId);
+
+    public FileDto getFileDetail(Long id);
 }

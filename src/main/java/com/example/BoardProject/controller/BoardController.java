@@ -6,6 +6,7 @@ import com.example.BoardProject.domain.FileDto;
 import com.example.BoardProject.paging.Criteria;
 import com.example.BoardProject.service.BoardService;
 import com.example.BoardProject.util.UiUtils;
+import org.apache.commons.io.FileUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +31,7 @@ public class BoardController extends UiUtils {
 
     private final BoardService boardService;
 
-    public BoardController(BoardService boardService) {
+    public BoardController(BoardService boardService)    {
         this.boardService = boardService;
     }
 
@@ -84,6 +92,9 @@ public class BoardController extends UiUtils {
         }
         model.addAttribute("board", board);
 
+        List<FileDto> fileList = boardService.getFileList(id);
+        model.addAttribute("fileList", fileList);
+
         return "board/view";
     }
 
@@ -104,5 +115,40 @@ public class BoardController extends UiUtils {
         return showMessageWithRedirect("시스템에 문제가 발생하였습니다.", "/board/list.do", Method.GET, pagingParams, model);
     }
     return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/board/list.do", Method.GET, pagingParams, model);
+    }
+
+    @GetMapping("/board/download")
+    public void downloadAttachFile(@RequestParam(value = "id", required = false) final Long id, Model model, HttpServletResponse response) {
+
+        if (id == null) throw new RuntimeException("올바르지 않은 접근입니다.");
+
+        FileDto fileInfo = boardService.getFileDetail(id);
+        if (fileInfo == null || "Y".equals(fileInfo.getDeleteYn())) {
+            throw new RuntimeException("파일 정보를 찾을 수 없습니다.");
+        }
+
+        String uploadDate = fileInfo.getInsertTime().format(DateTimeFormatter.ofPattern("yyMMdd"));
+        String uploadPath = Paths.get("C:", "develop", "upload", uploadDate).toString();
+
+        String filename = fileInfo.getOriginalName();
+        File file = new File(uploadPath, fileInfo.getSaveName());
+
+        try {
+            byte[] data = FileUtils.readFileToByteArray(file);
+            response.setContentType("application/octet-stream");
+            response.setContentLength(data.length);
+            response.setHeader("Content-Transfer-Encoding", "binary");
+            response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(filename, "UTF-8") + "\";");
+
+            response.getOutputStream().write(data);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+
+        } catch (IOException e) {
+            throw new RuntimeException("파일 다운로드에 실패하였습니다.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("시스템에 문제가 발생하였습니다.");
+        }
     }
 }
