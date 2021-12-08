@@ -28,7 +28,7 @@
                 <div class="dropdown dropdown-lg">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                     <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <form id="searchForm" th:action="@{/board/list.do}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+                        <form id="searchForm" th:action="@{/board/list}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
                             <!-- /* 검색 후 현재 페이지 번호를 1로 유지 */ -->
                             <input type="hidden" name="currentPageNo" value="1" />
                             <input type="hidden" name="recordsPerPage" th:value="${boardDto.recordsPerPage}" />

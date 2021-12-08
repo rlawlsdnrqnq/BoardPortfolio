@@ -17,7 +17,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>등록일</th>
-            <th>조회 수</th>
+            <!--<th>조회 수</th>-->
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             </td>
             <td th:text="${row.author}"></td>
             <td th:text="${#temporals.format(row.insertTime, 'yyyy-MM-dd')}"></td>
-            <td th:text="${row.viewCnt}"></td>
+            <!--<td th:text="${row.viewCnt}"></td>-->
           </tr>
           <tr th:unless="${not #lists.isEmpty(boardList)}">
             <td colspan="5">조회된 결과가 없습니다.</td>
