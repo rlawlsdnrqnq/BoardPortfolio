@@ -1,7 +1,6 @@
 package com.example.BoardProject.mapper;
 
 import com.example.BoardProject.domain.BoardDto;
-import com.example.BoardProject.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

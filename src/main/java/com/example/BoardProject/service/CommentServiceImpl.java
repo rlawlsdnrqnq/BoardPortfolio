@@ -2,7 +2,6 @@ package com.example.BoardProject.service;
 
 import com.example.BoardProject.domain.CommentDto;
 import com.example.BoardProject.mapper.CommentMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
