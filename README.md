@@ -1,3 +1,5 @@
+# MybatisBoard Project
+---
 ## 목차
 
 1.개발 목적  
@@ -28,7 +30,8 @@
 * IntellJ 2021-02
 ---
 ## 프로젝트 구조
-
+<img width="3000px" alt="이미지" src="https://user-images.githubusercontent.com/83013198/147048048-c4907246-87bb-4d86-8e69-308872ca09c4.png">
+<img width="1200" alt="이미지2" src="https://user-images.githubusercontent.com/83013198/147048063-835b1a0e-d982-4855-b471-9239793c7800.png">
 
 ---
 ## 기능
