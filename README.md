@@ -30,9 +30,15 @@
 * IntellJ 2021-02
 ---
 ## 프로젝트 구조
-<img width="300" src="https://user-images.githubusercontent.com/83013198/147532500-8b19115b-8b2b-4077-b048-565e030aed82.png">
-<img width="300" align="left" src="https://user-images.githubusercontent.com/83013198/147532503-e9228b67-a430-444c-ad49-e6843d0e692e.png">
-<img width="300" src="https://user-images.githubusercontent.com/83013198/147532511-7cd60821-e755-415e-9815-16a8456e04e2.png">
+<img width="300" align="left" src="https://user-images.githubusercontent.com/83013198/147532500-8b19115b-8b2b-4077-b048-565e030aed82.png">
+<img width="300" src="https://user-images.githubusercontent.com/83013198/147532503-e9228b67-a430-444c-ad49-e6843d0e692e.png">
+
+<br><br>
+
+<img width="300" align="left" src="https://user-images.githubusercontent.com/83013198/147803248-7edb73e1-7e0a-4451-83ad-97fdfd460931.PNG">
+<img width="300" src="https://user-images.githubusercontent.com/83013198/147805420-c83be289-094d-4868-bcb4-3a0b0496e38c.png">
+
+<br><br><br><br><br><br><br><br><br><br>
 
 ---
 ## 기능
