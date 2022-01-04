@@ -42,6 +42,7 @@
 
 ---
 ## 기능
+![업로드](https://user-images.githubusercontent.com/83013198/148020437-0dce6052-f9f5-471c-a6b9-4dc369b0c3a4.gif)
 ---
 ### 느낀 점
 1.
