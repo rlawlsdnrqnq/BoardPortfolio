@@ -42,7 +42,12 @@
 
 ---
 ## 기능
-![업로드](https://user-images.githubusercontent.com/83013198/148020437-0dce6052-f9f5-471c-a6b9-4dc369b0c3a4.gif)
+![업로드](https://user-images.githubusercontent.com/83013198/148327655-2e4697dc-84c9-4a4b-98d4-b4ed19954d06.gif)
+
+![다운로드](https://user-images.githubusercontent.com/83013198/148331469-0e17d7d5-4231-465b-a14b-3489449af4bd.gif)
+
+![검색](https://user-images.githubusercontent.com/83013198/148332075-fca27c98-d11b-4f85-937f-73ce6856c41a.gif)
+
 ---
 ### 느낀 점
 1.
