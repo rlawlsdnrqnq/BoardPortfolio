@@ -46,7 +46,16 @@
 
 ![다운로드](https://user-images.githubusercontent.com/83013198/148331469-0e17d7d5-4231-465b-a14b-3489449af4bd.gif)
 
+![댓글](https://user-images.githubusercontent.com/83013198/148725290-1890d998-3d13-4cc7-9b5b-251548a4c939.gif)
+
 ![검색](https://user-images.githubusercontent.com/83013198/148332075-fca27c98-d11b-4f85-937f-73ce6856c41a.gif)
+
+![페이징](https://user-images.githubusercontent.com/83013198/148725287-4fc6b5ea-3f01-466a-846c-831e41dd4ab6.gif)
+
+![이전 페이지 정보](https://user-images.githubusercontent.com/83013198/148725292-80b40a62-796e-4951-9d16-4a8a5cb275c6.gif)
+
+![리다이렉트 메시지](https://user-images.githubusercontent.com/83013198/148725293-1b2e506a-49c5-4360-8ab1-3ad854cf5715.gif)
+
 
 ---
 ### 느낀 점
