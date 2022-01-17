@@ -38,7 +38,10 @@
 <img width="300" align="left" src="https://user-images.githubusercontent.com/83013198/147803248-7edb73e1-7e0a-4451-83ad-97fdfd460931.PNG">
 <img width="300" src="https://user-images.githubusercontent.com/83013198/147805420-c83be289-094d-4868-bcb4-3a0b0496e38c.png">
 
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+공통적으로 사용하는 js/css는 언어 통계에서 제외시켰습니다.
+<br>
+javascript는 .html안에서 사용했기 때문에 통계되지 않습니다.
 
 ---
 ## 기능
