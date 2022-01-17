@@ -1,4 +1,1 @@
-*.css linguist-detectable=false
-common.js -linguist-vendored
-jquery.min.js -linguist-vendored
-main.js -linguist-vendored
+static/** linguist-vendored
