@@ -43,6 +43,10 @@
 ---
 ## 기능
 ![업로드](https://user-images.githubusercontent.com/83013198/148327655-2e4697dc-84c9-4a4b-98d4-b4ed19954d06.gif)
+업로드 파일은 서버 구동 폴더 밖 외부에 저장되도록 했으며
+DB에는 중복이 되지 않게 UUID를 이용한 난수 파일명과 업로드 파일명을 Insert했습니다.
+
+---
 
 ![다운로드](https://user-images.githubusercontent.com/83013198/148331469-0e17d7d5-4231-465b-a14b-3489449af4bd.gif)
 
