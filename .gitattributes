@@ -1,4 +1,4 @@
 *.css linguist-detectable=false
-common.js linguist-detectable=false
-jquery.min.js linguist-detectable=false
-main.js linguist-detectable=false
+common.js -linguist-vendored
+jquery.min.js -linguist-vendored
+main.js -linguist-vendored
