@@ -39,6 +39,10 @@
 <img width="300" src="https://user-images.githubusercontent.com/83013198/147805420-c83be289-094d-4868-bcb4-3a0b0496e38c.png">
 
 <br><br><br><br><br><br><br><br><br><br><br>
+sql 구문을 매핑하는 방법으로는 xml방식으로 적용했습니다. 
+<br>
+코드가 길어질수록 직관적으로 확인할 수 있기때문입니다.
+<br><br>
 공통적으로 사용하는 js/css는 언어 통계에서 제외시켰습니다.
 <br>
 javascript는 .html안에서 사용했기 때문에 통계되지 않습니다.
