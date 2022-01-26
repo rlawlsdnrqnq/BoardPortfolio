@@ -49,9 +49,17 @@ javascript는 .html안에서 사용했기 때문에 통계되지 않습니다.
 
 ---
 ## 기능
+
+<br>
+기본적인 CRUD인 글생성, 글읽기, 글수정, 글삭제는 포트폴리오에서 제외했습니다.
+
+---
+
 ![업로드](https://user-images.githubusercontent.com/83013198/148327655-2e4697dc-84c9-4a4b-98d4-b4ed19954d06.gif)
 업로드 파일은 서버 구동 폴더 밖 외부에 저장되도록 했으며
 DB에는 중복이 되지 않게 UUID를 이용한 난수 파일명과 업로드 파일명을 Insert했습니다.
+<br>
+![DB이미지](https://user-images.githubusercontent.com/83013198/151115570-b6c88879-38c2-4733-be07-c687fe8654b1.PNG)
 
 ---
 
