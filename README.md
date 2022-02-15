@@ -1,16 +1,15 @@
 # MybatisBoard Project
 ---
 ## 목차
+1. [**개발 목적**](#개발-목적)
 
-1.개발 목적  
+2. [**개발 환경**](#개발-환경)
 
-2.개발 환경 
+3. [**프로젝트 구조**](#프로젝트-구조)
 
-3.프로젝트 구조  
+4. [**기능**](#기능)
 
-4.기능 소개  
-
-5.느낀 점
+5. [**느낀점**](#느낀-점)
 
 ---
 ## 개발 목적
@@ -54,6 +53,7 @@ javascript는 .html안에서 사용했기 때문에 통계되지 않습니다.
 기본적인 CRUD 글생성, 글읽기, 글수정, 글삭제는 포트폴리오에서 제외했습니다.
 
 ---
+### 알러트 메시지
 ![알러트 메시지](https://user-images.githubusercontent.com/83013198/148725293-1b2e506a-49c5-4360-8ab1-3ad854cf5715.gif)
 ```javascript
 <th:block layout:fragment="script">
@@ -85,6 +85,7 @@ javascript는 .html안에서 사용했기 때문에 통계되지 않습니다.
 params가 비어있지 않으면 폼을 컨트롤러로 submit합니다. 비어있으면 redirectUri에 지정된 URI를 호출합니다.
 
 ---
+### 페이징
 ![페이징](https://user-images.githubusercontent.com/83013198/153809370-621db8f6-256c-4f0d-a1d5-4488e02f9953.gif)
 ```java
 @Getter
@@ -118,7 +119,7 @@ public class Criteria {
 
 }
 ```
-파라미터의 개수가 늘어난다거나 했을 때 파라미터의 관리와 수집이 까다로워지기 때문에 BoardDTO 클래스와 마찬가지로 공통으로 사용할 수 있는 Criteria클래스를 만들었습니다.
+파라미터의 개수가 늘어난다거나 했을 때 파라미터의 관리와 수집이 까다로워지기 때문에 공통으로 사용할 수 있는 Criteria클래스를 만들었습니다.
 <br>
 ```java
 <ul class="pagination">
@@ -130,8 +131,48 @@ public class Criteria {
 thymeleaf를 사용하여 이전 페이지 정보가 없으면 페이징 아이콘을 숨겼습니다.
 
 ---
+### 검색
 ![검색](https://user-images.githubusercontent.com/83013198/148332075-fca27c98-d11b-4f85-937f-73ce6856c41a.gif)
+```javascript
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+      /*<![CDATA[*/
 
+      function movePage(uri, queryString) {
+        location.href = uri + queryString;
+      }
+
+      function searchBoard(form) {
+        //메인 검색
+        if(isEmpty(form) == true) {
+          var searchKeyword = document.getElementById("mainSearchKeyword");
+          if(isEmpty(searchKeyword.value) == true) {
+            alert("키워드를 입력해 주세요.");
+            searchKeyword.focus();
+            return false;
+          }
+          form = document.getElementById("searchForm");
+          form.searchKeyword.value = searchKeyword.value;
+          form.submit();
+        }
+        //드롭다운 검색
+        if(isEmpty(form.searchKeyword.value) == true) {
+          alert("키워드를 입력해 주세요.");
+          form.searchKeyword.focus();
+          return false;
+        }
+      }
+
+      /*]]>*/
+    </script>
+  </th:block>
+```
+메인 검색과 드롭다운 검색을 처리하는 함수입니다. 메인에서 입력한 키워드만을 통해 검색이 이루어졌을 때 해당 함수의 첫 번째 if 문 안의 로직이 실행됩니다.
+<br>
+드롭다운 안에서의 검색은 이미 폼 태그로 감싸져 있으며 버튼의 타입이 submit으로 지정되어 있기 때문에 별 다른 처리 없이 컨트롤러로 폼 데이터를 전송합니다.
+
+---
+### 댓글
 ![댓글](https://user-images.githubusercontent.com/83013198/148725290-1890d998-3d13-4cc7-9b5b-251548a4c939.gif)
 ```java
 function insertComment(boardIdx) {
@@ -181,11 +222,11 @@ function insertComment(boardIdx) {
 업로드 파일은 서버 구동 폴더 밖 외부에 저장되도록 했으며
 DB에는 중복이 되지 않게 UUID를 이용한 난수 파일명과 업로드 파일명을 삽입했습니다.
 <br>
-### 파일을 DB에 저장 결과
+#### 파일을 DB에 저장 결과
 ![DB이미지](https://user-images.githubusercontent.com/83013198/151115570-b6c88879-38c2-4733-be07-c687fe8654b1.PNG)
 
 ---
-
+### 파일 다운로드
 ![다운로드](https://user-images.githubusercontent.com/83013198/148331469-0e17d7d5-4231-465b-a14b-3489449af4bd.gif)
 ```java
     @GetMapping("/board/download")
