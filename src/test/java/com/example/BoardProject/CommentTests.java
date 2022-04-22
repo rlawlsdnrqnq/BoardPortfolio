@@ -1,3 +1,4 @@
+/*
 package com.example.BoardProject;
 import com.example.BoardProject.domain.CommentDto;
 import com.example.BoardProject.mapper.CommentMapper;
@@ -47,4 +48,4 @@ class CommentTests {
         commentMapper.selectCommentList(params);
     }
 
-}
+}*/

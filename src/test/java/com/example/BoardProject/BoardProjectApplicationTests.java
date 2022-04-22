@@ -1,4 +1,4 @@
-package com.example.BoardProject;
+/*package com.example.BoardProject;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
@@ -42,4 +42,4 @@ class BoardProjectApplicationTests {
 			e.printStackTrace();
 		}
 	}
-}
+}*/

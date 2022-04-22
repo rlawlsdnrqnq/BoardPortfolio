@@ -1,4 +1,4 @@
-package com.example.BoardProject;
+/*package com.example.BoardProject;
 
 import com.example.BoardProject.domain.BoardDto;
 import com.example.BoardProject.mapper.BoardMapper;
@@ -8,12 +8,14 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
+@WebAppConfiguration
 @SpringBootTest
 public class MapperTests {
 
@@ -21,10 +23,10 @@ public class MapperTests {
     private BoardMapper boardMapper;
 
     //test 데이터 지울때만 쓸것
-    /*@AfterEach
+    *//*@AfterEach
     public void afterEach() {
         boardMapper.deleteTestData();
-    }*/
+    }*//*
 
     @Test
     public void insertBoard() {
@@ -110,7 +112,7 @@ public class MapperTests {
             }
         }
 
-       /* @Test
+       *//* @Test
         public void selectBoardList() {
             int boardTotalCount = boardMapper.selectBoardTotalCount();
             List<BoardDto> boardList = boardMapper.selectBoardList();
@@ -126,6 +128,6 @@ public class MapperTests {
                     }
                 }
             }
-        }*/
-    }
+        }*//*
+    }*/
 
